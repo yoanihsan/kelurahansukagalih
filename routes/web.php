@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login','LoginController@login');
+
+Route::get('/schedule-service','ScheduleServiceController@index');
+Route::get('/schedule-service/add/{id}','ScheduleServiceController@add');
+Route::post('/schedule-service/create','ScheduleServiceController@create');
+Route::get('/schedule-service/confirmation/{id}','ScheduleServiceController@confirmation');
+
+Route::get('/service','ServiceController@index');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home/search',[App\Http\Controllers\HomeController::class, 'search'])->name('home');
+Route::get('/home/search', ['as' => 'search', 'uses' => 'HomeController@search']);
